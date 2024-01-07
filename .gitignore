@@ -2,6 +2,7 @@
 *.d
 
 *.sh
+main
 
 # Compiled Object files
 *.slo
