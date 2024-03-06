@@ -33,3 +33,5 @@ main
 *.exe
 *.out
 *.app
+
+*.raw.cpp
