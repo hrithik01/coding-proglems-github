@@ -1,0 +1,2 @@
+max-rectangle-in-binary-matrix
+seating-arrangement-string
