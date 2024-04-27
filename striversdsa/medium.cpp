@@ -30,6 +30,17 @@ vector<int> nextPermutation(vector<int> &p, int n)
     return p;
 }
 
+long long maxSubarraySum(vector<int> arr, int n)
+{
+    long long tempMax = 0, maxAns = INT_MIN;;
+    for(int i: arr) {
+        tempMax += i;
+        maxAns = max(tempMax, maxAns);
+        if(tempMax<0) tempMax = 0;
+    }
+    return maxAns<0 ? 0 : maxAns;
+}
+
 int main () {
     cout<<"Hello From Hrithik \n";
     vector<int> p = {1,3,2};
