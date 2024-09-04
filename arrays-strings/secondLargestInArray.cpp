@@ -27,7 +27,7 @@ int secondLargestInArray(vector<int> arr) {
 }
 
 int main () {
-    vector<int> arr = {1, 2, 2, 4, 3, 3, 5, 5, 5, 5};
+    vector<int> arr = {5,5,5,5,5,4,3};
     cout<<"Second largest element is -: "<<secondLargestInArray(arr)<<endl;
     return 0;
 }

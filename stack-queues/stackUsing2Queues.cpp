@@ -74,34 +74,70 @@ void printStack(queue<int>& q1, queue<int>& q2) {
     cout << endl;
 }
 
+class SUQ {
+    private:
+        queue<int> q;
+    public:
+        void push(int x) {
+            int sizeq = q.size();
+            q.push(x);
+            while(sizeq--) {
+                q.push(q.front());
+                q.pop();
+            }
+        }
+        int pop() {
+            int n = q.front();
+            q.pop();
+            return n;
+        }
+        int top() {
+            return q.front();
+        }
+        bool empty() {
+            return q.empty();
+        }
+};
+
 int main () {
-    queue<int> q1, q2;
-   cout<<"push -: "<<push(q1, q2, 1)<<endl;
-   cout<<"push -: "<<push(q1, q2, 2)<<endl;
-   cout<<"push -: "<<push(q1, q2, 3)<<endl;
-    cout<<"push -: "<<push(q1, q2, 4)<<endl;
-    cout<<"push -: "<<push(q1, q2, 5)<<endl;
-    cout<<"print Stack \n";
-    printStack(q1, q2);
-    cout<<"pop -: \n"<<endl;
-    pop(q1, q2);
-    cout<<"print -: \n"<<endl;
-    printStack(q1, q2);
-    cout<<"top -: \n"<<endl;
-    top(q1, q2);
-    cout<<"print -: \n"<<endl;
-    printStack(q1, q2);
-    cout<<"isEmpty -: \n"<<endl;
-    isEmpty(q1, q2);
-    cout<<"size -: \n"<<endl;
-    size(q1, q2);
-    cout<<"pop -: \n"<<endl;
-    pop(q1, q2);
-    cout<<"pop -: \n"<<endl;
-    pop(q1, q2);
-    cout<<"top -: \n"<<endl;
-    top(q1, q2);
-    cout<<"print -: \n"<<endl;
-    printStack(q1, q2);
+//     queue<int> q1, q2;
+//    cout<<"push -: "<<push(q1, q2, 1)<<endl;
+//    cout<<"push -: "<<push(q1, q2, 2)<<endl;
+//    cout<<"push -: "<<push(q1, q2, 3)<<endl;
+//     cout<<"push -: "<<push(q1, q2, 4)<<endl;
+//     cout<<"push -: "<<push(q1, q2, 5)<<endl;
+//     cout<<"print Stack \n";
+//     printStack(q1, q2);
+//     cout<<"pop -: \n"<<endl;
+//     pop(q1, q2);
+//     cout<<"print -: \n"<<endl;
+//     printStack(q1, q2);
+//     cout<<"top -: \n"<<endl;
+//     top(q1, q2);
+//     cout<<"print -: \n"<<endl;
+//     printStack(q1, q2);
+//     cout<<"isEmpty -: \n"<<endl;
+//     isEmpty(q1, q2);
+//     cout<<"size -: \n"<<endl;
+//     size(q1, q2);
+//     cout<<"pop -: \n"<<endl;
+//     pop(q1, q2);
+//     cout<<"pop -: \n"<<endl;
+//     pop(q1, q2);
+//     cout<<"top -: \n"<<endl;
+//     top(q1, q2);
+//     cout<<"print -: \n"<<endl;
+//     printStack(q1, q2);
+    SUQ s;
+    s.push(1);
+    s.push(2);
+    s.push(3);
+    cout<<"Top element is -: "<<s.top()<<endl;
+    cout<<"Popped element is -: "<<s.pop()<<endl;
+    cout<<"Top element is -: "<<s.top()<<endl;
+    cout<<"Popped element is -: "<<s.pop()<<endl;
+    cout<<"Top element is -: "<<s.top()<<endl;
+    cout<<"Popped element is -: "<<s.pop()<<endl;
+    cout<<"Is stack empty -: "<<s.empty()<<endl;
     return 0;
 }
