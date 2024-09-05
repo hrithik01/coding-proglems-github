@@ -77,14 +77,13 @@ int reverseNumber(int n) {
 }
 
 bool checkPalindrome(int n) {
-    int rev = 0;
-    // 12321, rev will become 123 and n will be 12
-    while(n>rev) {
-        rev = rev*10 + n%10;
+    if(n<0) return false;
+    int og = n, x = 0;
+    while(n>0) {
+        x = 10*x + n%10;
         n /= 10;
     }
-    // if odd then eliminate the middle one
-    return n == rev || n == rev/10;
+    return x == og;
 }
 
 int gcd(int m, int n) {

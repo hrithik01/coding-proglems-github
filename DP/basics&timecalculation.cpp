@@ -53,9 +53,19 @@ class Pascals_Triangle {
                 for(int j=i; j>0; j--) {
                     result[j] += result[j-1];
                 }
+        }
+        return result;
     }
-    return result;
-}
+
+        vector<int> lastRowStriverTechnique(int N) {
+            vector<int> row(N, 0);
+            row[0] = 1;
+            for(int i=1; i<N; i++) {
+                row[i] = row[i-1]*(N-i);
+                row[i] = row[i]/i;
+            }
+            return row;
+        }
 };
 
 int main() {
@@ -84,7 +94,8 @@ int main() {
         cout<<endl;
     }
 
-    vector<int> result2 = pt.generateLastRow(5);
+    // vector<int> result2 = pt.generateLastRow(5);
+    vector<int> result2 = pt.lastRowStriverTechnique(5);
     cout<<"Last row: \n";
     for(auto i : result2) {
         cout<<i<<" ";

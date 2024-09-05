@@ -89,19 +89,30 @@ vector<int> primeNumbersTillN(int n)
     return primes;
 }
 
+int ncr(int n, int r) {
+    // striver pascals, 10/1 * 9/2 * 8/3 for 10C3
+    int x = min(r, n-r), res = 1;
+    for(int i=0; i<x; i++) {
+        res *= (n-i);
+        res /= (i+1);
+    }
+    return res;
+}
+
 int main () {
     cout<<"Hello From Hrithik \n";
-    vector<vector<int>> matrix = {{1,1,1},{1,0,0},{1,1,1}};
-    setZeros(matrix);
-    for(int i=0; i<matrix.size(); i++) {
-        traverseArray(matrix[i]);
-    }
-    int arr[] = {0,1,2,0,1,2};
-    int n = sizeof(arr)/sizeof(arr[0]);
-    sort012Eff(arr, n);
+    // vector<vector<int>> matrix = {{1,1,1},{1,0,0},{1,1,1}};
+    // setZeros(matrix);
+    // for(int i=0; i<matrix.size(); i++) {
+    //     traverseArray(matrix[i]);
+    // }
+    // int arr[] = {0,1,2,0,1,2};
+    // int n = sizeof(arr)/sizeof(arr[0]);
+    // sort012Eff(arr, n);
 
-    // Convert array to vector
-    std::vector<int> vec(arr, arr + n);  
-    traverseArray(vec);
+    // // Convert array to vector
+    // std::vector<int> vec(arr, arr + n);  
+    // traverseArray(vec);
+    cout<<ncr(10,3)<<endl;
     return 0;
 }
