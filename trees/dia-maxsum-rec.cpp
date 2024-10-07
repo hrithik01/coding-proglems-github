@@ -43,6 +43,11 @@ bool balancedTree(tnode* root) {
     return abs(lh - rh) <= 1 && balancedTree(root->left) && balancedTree(root->right);
 }
 
+bool isSameTree(tnode* r1, tnode* r2) {
+    if(!r1 || !r2) return r1==r2;
+    return r1->data == r2->data && isSameTree(r1->left,r2->left) && isSameTree(r1->right,r2->right);
+}
+
 int main() {
     tnode* root = new tnode(-5);
     root->left = new tnode(-4);
