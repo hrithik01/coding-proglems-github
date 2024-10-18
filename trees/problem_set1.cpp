@@ -2,6 +2,7 @@
 #include <iostream>
 #include <queue>
 #include <map>
+#include <set>
 
 using namespace std;
 
@@ -64,7 +65,7 @@ void bottom_view(vector<int>& v, tnode* root) {
     print_clear_vector(v);
 }
 
-void left_view(vector<int>& v, tnode* root) {
+void right_view(vector<int>& v, tnode* root) {
     // use level order traversal, instead hor_idx,use ver_idx + 1 like top view
 }
 
@@ -76,6 +77,14 @@ tnode* lca(tnode* root, int r1, int r2) {
     tnode* right = lca(root->right, r1, r2);
     if(left && right) return root;
     return left ? left : right;
+}
+
+tnode* lca_3nodes(tnode* root, tnode* r1, tnode* r2, tnode* r3) {
+    if(!root || set<tnode*>{r1, r2, r3}.count(root)) return root;
+    tnode* l = lca_3nodes(root->left, r1, r2, r3);
+    tnode* r = lca_3nodes(root->right, r1, r2, r3);
+    if(l && r) return root;
+    return l ? l : r;
 }
 
 int main() {
@@ -90,8 +99,11 @@ int main() {
     root->left->left->right = new tnode(9);
 
     vector<int> ans;
-    top_view(ans, root);
-    bottom_view(ans, root);
+    // top_view(ans, root);
+    // bottom_view(ans, root);
+
+    tnode* ans_root = lca_3nodes(root, root->right, root->right->left, root->left->right);
+    cout<<ans_root->val<<endl;
 
     return 0;
 }
