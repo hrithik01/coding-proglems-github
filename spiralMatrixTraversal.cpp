@@ -22,6 +22,31 @@ vector<int> spiralMatrixTraversal (vector< vector<int> > matrix) {
     return ans;
 }
 
+vector<int> spiralPathMatrix(vector<vector<int>> arr, int n, int m) 
+{
+    int t=0, b=n-1, l=0, r=m-1;
+    vector<int> ans;
+    while(t<=b && l<=r) {
+        for(int i=l; i<=r; i++) 
+            ans.push_back(arr[t][i]);
+        t++;
+        for(int i=t; i<=b; i++) 
+            ans.push_back(arr[i][r]);
+        r--;
+        if(t<=b) {
+            for(int i=r; i>=l; i--)
+                ans.push_back(arr[b][i]);
+            b--;
+        }
+        if(l<=r) {
+            for(int i=b; i>=t; i--)
+                ans.push_back(arr[i][l]);
+            l++;
+        }
+    }
+    return ans;
+}
+
 int main() {
     vector<vector<int> > matrix = {
         {1, 2, 3, 4, 5},
