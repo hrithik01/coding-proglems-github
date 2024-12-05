@@ -1,0 +1,17 @@
+1) Kth last node in a linked list-:
+
+node *findKthFromLast(node *head, int k)
+{
+	node* fast = head;
+	node* slow = head;
+	while(k--) {
+		fast = fast->next;
+	}
+	while(fast) {
+		fast = fast->next;
+		slow = slow->next;
+	}
+	return slow;
+}
+
+2) 
