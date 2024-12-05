@@ -66,7 +66,50 @@ void bottom_view(vector<int>& v, tnode* root) {
 }
 
 void right_view(vector<int>& v, tnode* root) {
-    // use level order traversal, instead hor_idx,use ver_idx + 1 like top view
+    if (!root) return;
+    queue<tnode*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        int size = q.size();
+        
+        for (int i = 0; i < size; i++) {
+            tnode* node = q.front();
+            q.pop();
+            // If this is the last node at this level, it's part of the right view
+            if (i == size - 1) {
+                v.push_back(node->val);
+            }
+            // Enqueue children in standard order
+            if (node->left) q.push(node->left);
+            if (node->right) q.push(node->right);
+        }
+    }
+    
+    print_clear_vector(v);
+}
+
+void left_view(vector<int>& v, tnode* root) {
+    if (!root) return;
+    queue<tnode*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        int size = q.size();
+        
+        for (int i = 0; i < size; i++) {
+            tnode* node = q.front();
+            q.pop();
+            // If this is the first node at this level, it's part of the left view
+            if (i == 0) {
+                v.push_back(node->val);
+            }
+            // Enqueue children in standard order
+            if (node->left) q.push(node->left);
+            if (node->right) q.push(node->right);
+        }
+    }
+    print_clear_vector(v);
 }
 
 tnode* lca(tnode* root, int r1, int r2) {
