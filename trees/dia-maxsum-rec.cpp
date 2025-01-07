@@ -24,6 +24,7 @@ int max_dia(tnode* root, int& ans) {
     return max(lh, rh) + 1;
 }
 
+// Maximum path sum between any two nodes in the tree
 int max_path_sum(tnode* root, int& ans) {
     if(!root) return 0;
     int lsum = max(0, max_path_sum(root->left, ans));
@@ -37,6 +38,7 @@ int height(tnode* root) {
     return 1 + max(height(root->left), height(root->right));
 }
 
+// A balanced tree is a tree in which the height of the two subtrees of every node never differ by more than 1.
 bool balancedTree(tnode* root) {
     if(!root) return true;
     int lh = height(root->left);
@@ -67,6 +69,11 @@ int width_tress(tnode* root) {
     return max_width;  
 }
 
+/*
+     -5
+   -4  -6
+ -3 -2  
+*/
 int main() {
     tnode* root = new tnode(-5);
     root->left = new tnode(-4);
