@@ -203,3 +203,70 @@ bool isUnorderedSubset = isSubset(unorderedMap, orderedMap);  // Will be true
 - **isSubset function**: 
   - Time Complexity: O(m) for unordered_map, O(m log n) for map where m is smaller map size
   - Space Complexity: O(1), constant extra space
+
+
+## Ordered Map vs Unordered Map
+
+### Key Characteristics
+
+| Feature | `map` (Ordered) | `unordered_map` (Unordered) |
+|---------|----------------|----------------------------|
+| Implementation | Red-Black Tree | Hash Table |
+| Order of elements | Sorted by keys | No defined order |
+| Time Complexity (Average) | Insert: O(log n)<br>Access: O(log n)<br>Delete: O(log n) | Insert: O(1)<br>Access: O(1)<br>Delete: O(1) |
+| Time Complexity (Worst) | Insert: O(log n)<br>Access: O(log n)<br>Delete: O(log n) | Insert: O(n)<br>Access: O(n)<br>Delete: O(n) |
+| Space Complexity | O(n) | O(n) |
+| Iterator Invalidation | Only for erased elements | Any insertion may invalidate all iterators |
+
+### When to Use Each
+
+- **Use `map` when:**
+    - Order of elements matters (sorted by key)
+    - Need guaranteed logarithmic time complexity
+    - Working with custom comparison functions
+    - Need stable iterator references after insertions/deletions
+
+- **Use `unordered_map` when:**
+    - Order doesn't matter
+    - Need fastest average lookup time
+    - Working with simple, hashable keys
+    - Memory overhead of hash table is acceptable
+
+### Example Usage
+
+```cpp
+// Ordered map example
+map<string, int> orderedMap;
+orderedMap["banana"] = 3;
+orderedMap["apple"] = 5;
+orderedMap["cherry"] = 7;
+
+// Elements are automatically sorted by key
+for (const auto& [key, value] : orderedMap) {
+        cout << key << ": " << value << endl;
+}
+// Output will be:
+// apple: 5
+// banana: 3
+// cherry: 7
+
+// Unordered map example
+unordered_map<string, int> unorderedMap;
+unorderedMap["banana"] = 3;
+unorderedMap["apple"] = 5;
+unorderedMap["cherry"] = 7;
+
+// Order is not guaranteed
+for (const auto& [key, value] : unorderedMap) {
+        cout << key << ": " << value << endl;
+}
+// Output could be any order, for example:
+// banana: 3
+// cherry: 7
+// apple: 5
+```
+
+### Best Case Scenarios
+
+- **`map` Best Case:** When you need to maintain sorted elements or perform range-based operations
+- **`unordered_map` Best Case:** When you need extremely fast lookups and insertions with no sorting requirements
