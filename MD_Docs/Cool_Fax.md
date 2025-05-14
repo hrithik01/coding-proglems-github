@@ -71,3 +71,17 @@ for (auto& ptr : source) {
 - Use `move` for rvalue references to enable move semantics
 - Consider using `forward` instead for perfect forwarding
 - Remember that moved-from objects must still be in a valid state
+
+## Note for move
+### Best Use Cases for `std::move`
+
+- **Large Containers**: For objects like `std::vector` or `std::string` where copying could involve allocating new memory and copying many elements.
+- **Resource-Managing Classes**: For classes like `std::unique_ptr` where ownership can be transferred without duplicating resources.
+- **Custom Types**: When you implement move constructors/assignment operators for custom classes to optimize performance.
+
+### Why It's Redundant for Integers
+
+- **Trivial Type**: Integers (and other primitive types) are trivially copyable, making both copy and move operations have similar (minimal) cost.
+- **No Resource Ownership**: They don't manage resources, so there's no benefit in "moving" them.
+
+In your code, since `int` is trivial to copy, using `std::move` adds unnecessary complexity without improving performance.
