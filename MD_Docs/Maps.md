@@ -270,3 +270,88 @@ for (const auto& [key, value] : unorderedMap) {
 
 - **`map` Best Case:** When you need to maintain sorted elements or perform range-based operations
 - **`unordered_map` Best Case:** When you need extremely fast lookups and insertions with no sorting requirements
+
+## Checking Unordered Map Equality and Subset
+
+### Unordered Map Equality
+- **Purpose**: Determine if two `unordered_map<string, int>` instances have identical key-value pairs.  
+- **Approach**:  
+    - Compare sizes first.  
+    - Iterate through the first map and ensure each key exists in the second with the same value.
+
+```cpp
+// Function to check unordered_map equality
+template<typename K, typename V>
+bool areEqual(const unordered_map<K, V>& m1, const unordered_map<K, V>& m2) {
+        // If sizes differ, maps can't be equal
+        if (m1.size() != m2.size())
+                return false;
+        // Check every key-value in m1 against m2
+        for (const auto& [key, value] : m1) {
+                auto it = m2.find(key);
+                // Missing key or different value → not equal
+                if (it == m2.end() || it->second != value)
+                        return false;
+        }
+        return true;
+}
+```
+
+**Input Example**:
+```cpp
+unordered_map<string, int> mapA = {{"x", 1}, {"y", 2}, {"z", 3}};
+unordered_map<string, int> mapB = {{"x", 1}, {"y", 2}, {"z", 3}};
+```
+**Output**:
+```
+areEqual(mapA, mapB) -> true
+```
+
+### Unordered Map Subset
+- **Purpose**: Check if every key-value pair in one `unordered_map<string, int>` (the *subset*) exists in another (the *superset*).  
+- **Approach**:  
+    - Iterate through the smaller map.  
+    - For each entry, verify presence and value match in the larger map.
+
+```cpp
+// Function to check unordered_map subset
+template<typename K, typename V>
+bool isSubset(const unordered_map<K, V>& smallMap, const unordered_map<K, V>& bigMap) {
+        // Verify each key-value pair in smallMap
+        for (const auto& [key, value] : smallMap) {
+                auto it = bigMap.find(key);
+                // Missing key or different value → not a subset
+                if (it == bigMap.end() || it->second != value)
+                        return false;
+        }
+        return true;
+}
+// If value is integer, you can also use this function
+bool isSubset(const unordered_map<char, int>& mpt, const unordered_map<char, int>& mps) {
+        for (const auto& [key, value] : mpt) {
+                auto it = mps.find(key);
+                // Missing key or less value → not a subset
+                if (it == mps.end() || it->second < value)
+                        return false;
+        }
+        return true;
+}
+```
+
+**Input Example**:
+```cpp
+unordered_map<string, int> mapC = {{"x", 1}, {"y", 2}};
+unordered_map<string, int> mapD = {{"x", 1}, {"y", 2}, {"z", 3}};
+```
+**Output**:
+```
+isSubset(mapC, mapD) -> true
+```
+
+## Complexity Analysis
+- **areEqual**  
+    - Time Complexity: *O(n)* on average, where *n* is the number of elements.  
+    - Space Complexity: *O(1)* extra space.
+- **isSubset**  
+    - Time Complexity: *O(m)* on average, where *m* is the size of the smaller map.  
+    - Space Complexity: *O(1)* extra space.
