@@ -27,10 +27,33 @@ for (const auto& elem : mySet) {
 ```cpp
 // Traverse the set using an iterator
 for (auto it = mySet.begin(); it != mySet.end(); ++it) {
-    // Process the dereferenced iterator
-    std::cout << *it << " ";
+  // Process the dereferenced iterator
+  std::cout << *it << " ";
 }
 ```
+
+### Accessing adjacent elements with iterators
+- **Approach**: Use *iterators* to access adjacent elements (predecessor and successor) within an ordered set.
+- **Time Complexity**: O(log n) for each operation, where n is the number of elements in the set.
+- **Space Complexity**: O(1)
+- **Example**:
+```cpp
+// Given an iterator to some element
+auto it = mySet.find(value);
+if (it != mySet.begin()) {
+  // Get previous element
+  auto prevIt = std::prev(it);
+  std::cout << "Previous element: " << *prevIt << std::endl;
+}
+if (std::next(it) != mySet.end()) {
+  // Get next element
+  auto nextIt = std::next(it);
+  std::cout << "Next element: " << *nextIt << std::endl;
+}
+```
+- **Input**: {10, 20, 30, 40, 50}, value = 30
+- **Output**: Previous element: 20
+       Next element: 40
 - **Input**: {'a', 'b', 'c'}
 - **Output**: a b c
 
