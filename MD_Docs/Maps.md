@@ -355,3 +355,50 @@ isSubset(mapC, mapD) -> true
 - **isSubset**  
     - Time Complexity: *O(m)* on average, where *m* is the size of the smaller map.  
     - Space Complexity: *O(1)* extra space.
+
+## Maps can also store functors and function pointers
+- Maps can be used to store function pointers or functors, allowing for dynamic dispatch based on keys.
+- This is useful for implementing command patterns or dispatch tables.
+
+```cpp
+// map each operator string to the corresponding lambda
+unordered_map<string, function<int(int,int)>> ops = {
+    { "+", [](int a, int b) { return a + b; } },
+    { "-", [](int a, int b) { return a - b; } },
+    { "*", [](int a, int b) { return a * b; } },
+    { "/", [](int a, int b) { return a / b; } }
+};
+
+// applies the operator named by 'op' to operands a and b
+int applyOp(const string& op, int a, int b) {
+    // look up the operator in the map (O(1) average)
+    auto it = ops.find(op);
+    if (it != ops.end()) {
+        return it->second(a, b);
+    }
+    throw invalid_argument("Unsupported operator: " + op);
+}
+// Example usage
+int main() {
+    int a = 10, b = 5;
+    cout << applyOp("+", a, b) << endl; // Output: 15
+    cout << applyOp("-", a, b) << endl; // Output: 5
+    cout << applyOp("*", a, b) << endl; // Output: 50
+    cout << applyOp("/", a, b) << endl; // Output: 2
+}
+```
+## `<int(int,int)>` Template Parameter
+- **Definition**: Template parameter for `std::function`.  
+- **Description**: A callable that takes two `int` arguments and returns an `int`. *Think of it as a type alias for such callables.*
+
+## `[]` Lambda Capture Clause
+- **Clause**: `[]` (placed before the parameter list `(int a, int b)`)  
+- **Meaning**: *Capture nothing* from the surrounding scope.  
+- **Details**:  
+    - Introduces an anonymous function (lambda) with parameters `(int a, int b)` and body `{ return a + b; }`.  
+    - To capture local variables, modify the clause (e.g., `[x]` or `[&]`).
+
+```cpp
+// Example: std::function using <int(int,int)> and empty capture lambda
+std::function<int(int,int)> addFunc = [](int a, int b) { return a + b; };
+```
