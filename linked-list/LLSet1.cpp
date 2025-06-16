@@ -96,6 +96,42 @@ Node *mergeTwoLists(Node *l1, Node *l2)
     return ans->next;
 }
 
+/*
+PROBLEM 3 - REVERSE A LINKED LIST 2
+Reverse a linked list from position m to n. Do it in one-pass.
+You may assume that m <= n.
+Input: head = [1,2,3,4,5], m = 2, n = 4
+Output: [1,4,3,2,5]
+*/
+
+Node *reverseBetween(Node *head, int m, int n)
+{
+    if (!head || m == n)
+        return head;
+
+    Node dummy(0);
+    dummy.next = head;
+    Node *prev = &dummy;
+
+    // Move prev to the node before the m-th node
+    for (int i = 1; i < m; ++i)
+        prev = prev->next;
+
+    Node *start = prev->next; // m-th node
+    Node *then = start->next; // (m+1)-th node
+
+    // Reverse the sublist from m to n
+    for (int i = 0; i < n - m; ++i)
+    {
+        start->next = then->next;
+        then->next = prev->next;
+        prev->next = then;
+        then = start->next;
+    }
+
+    return dummy.next;
+}
+
 int main()
 {
     Node *l1 = new Node(2);
